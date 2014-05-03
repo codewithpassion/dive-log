@@ -1,0 +1,37 @@
+doctype html
+html(lang='en' ng-app='diveLogApp')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, user-scalable=no')
+    title= title
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')                
+body
+    div.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+        div.container
+            div.navbar-header
+                a.navbar-brand(href='#/')= title
+
+
+    .container
+        div(ng-controller='DiveLogCtrl')
+    if has_header
+        div.jumbotron
+            div.container
+                block header
+
+    div.container
+        div(ng-view)
+
+
+    script(src='/bower_components/jquery/dist/jquery.min.js')
+    script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+    script(src='/bower_components/angular/angular.js')
+    script(src='/bower_components/angular-route/angular-route.min.js')
+    script(src='/bower_components/angular-resource/angular-resource.min.js')
+    script(src='/javascripts/global.js')
+    script(src='/javascripts/app.js')
+    script(src='/javascripts/services.js')
+    script(src='/javascripts/controllers.js')
+    script(src='/javascripts/filters.js')
+    script(src='/javascripts/directives.js')
