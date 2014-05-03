@@ -8,7 +8,7 @@ function DiveLogCtrl($scope, $http) {
             $scope.name = data.name;
         }).
         error(function(data, status, headers, config) {
-            $scope.name = 'Error!'
+            $scope.name  = 'Error!'
         });
 }
 
