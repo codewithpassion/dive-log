@@ -22,6 +22,22 @@ exports.index = function(req, res){
 };
 
 exports.partial = function (req, res) {
-    var name = req.params.name;
-    res.render('partials/partial' + name);
+    if (typeof req.params.component != 'undefined') {
+        var toRender = '../components/' + req.params.component + '/views/' + req.params.name;
+        console.log(toRender);
+        res.render(toRender,{ full: true, title: req.params.name}, function(err, html){
+            "use strict";
+            if (typeof err != 'undefined' && err != null) {
+                console.log(err);
+            }
+            else{
+                res.send(html);
+            }
+
+        });
+    }
+    else {
+        var name = req.params.name;
+        res.render('partials/partial' + name);
+    }
 };

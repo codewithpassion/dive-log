@@ -53,7 +53,9 @@ componentLoader.loadComponents(dir, function(components) {
     });
 */
 
+    //https://github.com/jimakker/angular-express-bootstrap-seed/blob/master/views/partials/partial2.jade
     app.get('/', routes.index);
+    app.get('/partial/:component/:name', routes.partial);
     app.get('/partial/:name', routes.partial);
 
     // JSON API
