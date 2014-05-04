@@ -34,10 +34,6 @@ app.use(function(req,res,next){
 });
 
 
-//app.use('/', routes);
-
-
-
 // Keep track of components js and css to load them in the view
 app.scripts = [];
 app.styles = [];
@@ -45,15 +41,11 @@ app.styles = [];
 var dir = path.join(__dirname, 'components');
 componentLoader.loadComponents(dir, function(components) {
     "use strict";
-/*    components.forEach(function(component) {
-        console.log("Loaded plugin '" + component.name + "' ");
-        if ( typeof component.router != 'undefined' && component.router !== "" ) {
-            app.use("/" + component.name, component.router);
-        }
-    });
-*/
 
     //https://github.com/jimakker/angular-express-bootstrap-seed/blob/master/views/partials/partial2.jade
+    //https://github.com/angular-app/angular-app
+    //https://github.com/sgebhardt/ng-module-boilerplate
+
     app.get('/', routes.index);
     app.get('/partial/:component/:name', routes.partial);
     app.get('/partial/:name', routes.partial);
