@@ -37,6 +37,7 @@ app.use(function(req,res,next){
 // Keep track of components js and css to load them in the view
 app.scripts = [];
 app.styles = [];
+app.ngModules = [];
 
 var dir = path.join(__dirname, 'components');
 componentLoader.loadComponents(dir, function(components) {
@@ -48,6 +49,26 @@ componentLoader.loadComponents(dir, function(components) {
     //https://github.com/sgebhardt/ng-module-boilerplate
 
     // lazy loading https://github.com/nikospara/angular-require-lazy
+
+
+    components.filter(function(component){
+        return typeof component.ngModule != 'undefined';
+    }).forEach(function(component){
+        app.ngModules.push(component.ngModule);
+        component.scripts.forEach(function (script){
+            app.scripts.push(script);
+        })
+        app.use('/component/' + component.name, express.static(component.publicDir));
+    });
+
+    app.use(function(req, res,next) {
+        var modString = app.ngModules.toString();
+        res.locals.ngModulesScript = "window.getNgModules = function() {return " + JSON.stringify(app.ngModules) + " };";
+        res.locals.scripts = app.scripts;
+        res.locals.styles = app.styles;
+        console.log("###### " + app.scripts);
+        next();
+    });
 
     app.get('/', routes.index);
     app.get('/partial/:component/:name', routes.partial);

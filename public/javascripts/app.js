@@ -6,8 +6,6 @@ angular.module('diveLogApp', ['diveLogApp.filters', 'diveLogApp.services', 'dive
     config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         $routeProvider.when('/view1', {templateUrl: 'partial/1', controller: MyCtrl1});
         $routeProvider.when('/view2', {templateUrl: 'partial/2', controller: MyCtrl2});
-        $routeProvider.when('/divers', {templateUrl: 'partial/divers/diver', controller: DiverController});
-        $routeProvider.when('/divers/diver', {templateUrl: 'partial/divers/diver', controller: DiverController});
 
         $routeProvider.otherwise({redirectTo: '/view1'});
         $locationProvider.html5Mode(true);
