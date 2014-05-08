@@ -42,9 +42,12 @@ var dir = path.join(__dirname, 'components');
 componentLoader.loadComponents(dir, function(components) {
     "use strict";
 
+    //https://github.com/nikospara/angular-require-lazy
     //https://github.com/jimakker/angular-express-bootstrap-seed/blob/master/views/partials/partial2.jade
     //https://github.com/angular-app/angular-app
     //https://github.com/sgebhardt/ng-module-boilerplate
+
+    // lazy loading https://github.com/nikospara/angular-require-lazy
 
     app.get('/', routes.index);
     app.get('/partial/:component/:name', routes.partial);
