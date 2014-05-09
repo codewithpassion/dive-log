@@ -49,8 +49,9 @@ componentLoader.loadComponents(dir, function(components) {
         app.ngModules.push(component.ngModule);
         app.scripts = app.scripts.concat(component.scripts);
 
-        //reguster the static dir for the component
+        //register the static dir for the component
         app.use('/component/' + component.name, express.static(component.publicDir));
+        app.use('/api', component.apiRouter);
     });
 
     app.use(function(req, res,next) {

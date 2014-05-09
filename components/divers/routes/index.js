@@ -6,4 +6,5 @@ router.get('/', function(req, res) {
     res.render(__dirname + '../views/divers', { full: true, title: 'Dive'});
 });
 
+
 module.exports = router;

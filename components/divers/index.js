@@ -2,6 +2,7 @@
 function divers(name) {
     var component = {
         router : require("./routes/index"),
+        apiRouter : require('./routes/api'),
         ngModule: 'diversModule'
     };
 

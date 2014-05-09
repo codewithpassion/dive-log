@@ -1,8 +1,7 @@
 'use strict';
 angular.module('diversModule')
-    .controller('DiversController', ['$scope', function($scope) {
-        $scope.divers = [
-            { name: "John Doe", email: "john.doe@gmail.com" },
-            { name: "Dom Fretz", email: "info@divewithpassion.com" }
-        ]
+    .controller('DiversController', ['$scope', '$http', function($scope, $http) {
+        $http.get('/api/diver/list').success(function(data) {
+            $scope.divers = data;
+        });
     }]);
