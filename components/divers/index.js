@@ -1,4 +1,4 @@
-
+'use strict'
 function divers(name) {
     var component = {
         router : require("./routes/index"),
