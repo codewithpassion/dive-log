@@ -6,5 +6,5 @@ p.container
     p Registered Divers:
     ul
         li(ng-repeat='diver in divers')
-            a(href='mailto:{{diver.email}}') {{diver.name}}
+            a(href='/divers/{{diver.id}}') {{diver.name}}
 
