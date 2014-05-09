@@ -5,15 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var componentLoader = require('./lib/component-loader')();
+var app = express();
 
 // Database
 var mongo = require('mongoskin');
 var db = mongo.db("mongodb://localhost:27017/dive-log", {native_parser:true});
 
+// routing
 var routes = require('./routes');
 var api = require('./routes/api');
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,10 +28,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/bower_components", express.static(path.join(__dirname, 'bower_components')));
 
 // Make our db accessible to our router
-app.use(function(req,res,next){
+/*app.use(function(req,res,next){
     req.db = db;
     next();
-});
+});*/
 
 
 // Keep track of components js and css to load them in the view
@@ -43,30 +43,20 @@ var dir = path.join(__dirname, 'components');
 componentLoader.loadComponents(dir, function(components) {
     "use strict";
 
-    //https://github.com/nikospara/angular-require-lazy
-    //https://github.com/jimakker/angular-express-bootstrap-seed/blob/master/views/partials/partial2.jade
-    //https://github.com/angular-app/angular-app
-    //https://github.com/sgebhardt/ng-module-boilerplate
-
-    // lazy loading https://github.com/nikospara/angular-require-lazy
-
-
     components.filter(function(component){
         return typeof component.ngModule != 'undefined';
     }).forEach(function(component){
         app.ngModules.push(component.ngModule);
-        component.scripts.forEach(function (script){
-            app.scripts.push(script);
-        })
+        app.scripts = app.scripts.concat(component.scripts);
+
+        //reguster the static dir for the component
         app.use('/component/' + component.name, express.static(component.publicDir));
     });
 
     app.use(function(req, res,next) {
-        var modString = app.ngModules.toString();
         res.locals.ngModulesScript = "window.getNgModules = function() {return " + JSON.stringify(app.ngModules) + " };";
         res.locals.scripts = app.scripts;
         res.locals.styles = app.styles;
-        console.log("###### " + app.scripts);
         next();
     });
 
