@@ -24,4 +24,19 @@ router.get('/diver/:diverId', function(req, res){
     }
 });
 
+router.post('/diver', function(req, res) {
+    "use strict";
+    var diverIndex = divers.map(function(diver) { return diver.id }).indexOf(req.body.id);
+    if (diverIndex != -1 ) {
+        divers[diverIndex] = req.body;
+        res.status(200);
+        res.send(req.body);
+    }
+    else {
+        res.status(404);
+        res.send({ msg: 'Not Found!'});
+    }
+
+});
+
 module.exports = router;

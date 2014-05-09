@@ -1,5 +1,6 @@
 'use strict';
-angular.module('diversModule', ['ngRoute', 'diverService', 'xeditable'])
+var app =
+    angular.module('diversModule', ['ngRoute', 'diverService', 'xeditable'])
     .config(['$routeProvider', '$locationProvider', function($routeProvider) {
         $routeProvider
             .when('/divers', {
@@ -12,3 +13,7 @@ angular.module('diversModule', ['ngRoute', 'diverService', 'xeditable'])
             })
             .otherwise({ redirectTo: '/divers' })
     }]);
+
+app.run(function(editableOptions) {
+    editableOptions.theme = 'bs3';
+});
