@@ -1,5 +1,5 @@
 'use strict';
-angular.module('diversModule', ['ngRoute', 'diverService'])
+angular.module('diversModule', ['ngRoute', 'diverService', 'xeditable'])
     .config(['$routeProvider', '$locationProvider', function($routeProvider) {
         $routeProvider
             .when('/divers', {

@@ -1,7 +1,19 @@
-h1 Details for: {{ name }}
+form(editable-form='', name='diverDetailForm', onaftersave='saveUser()', role='form')
+    h1 Details for: {{ diver.name }}
 
-b Name:
-p {{ diver.name }}
+    p
+        strong Name: &nbsp;
+        span(editable-text="diver.name", e-name='name',e-required='') {{ diver.name || 'empty' }}
 
-b EMail:
-p {{ diver.email }}
+    p
+        strong EMail:&nbsp;
+        span(editable-text="diver.email", e-name='email',e-required='') {{ diver.email || 'empty' }}
+
+    div
+        // button to show form
+        button(type='button',class='btn btn-default', ng-click='diverDetailForm.$show()',ng-show='!diverDetailForm.$visible') Edit
+
+        // buttons to submit / cancel form
+        span(ng-show='diverDetailForm.$visible')
+            button(type='submit', class='btn btn-primary', ng-disabled='diverDetailForm.$waiting') Save
+            button(type='button', class='btn btn-default', ng-disabled='diverDetailForm.$waiting', ng-click='diverDetailForm.$cancel()') Cancel
