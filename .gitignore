@@ -25,3 +25,8 @@ build/Release
 node_modules
 
 .idea
+*.sw*
+*~
+build/
+bin/
+vendor/
